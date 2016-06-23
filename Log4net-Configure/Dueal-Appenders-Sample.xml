@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+  </configSections>
+  <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+    </startup>
+  
+    
+    <log4net>
+      
+      <appender name="ConsoleAppender" type="log4net.Appender.ConsoleAppender" >
+        <layout type="log4net.Layout.PatternLayout">
+          <conversionPattern value="%5level [%date] (%file:%line) %message%newline" />
+        </layout>
+      </appender>
+      <appender name="FileAppender" type="log4net.Appender.RollingFileAppender" >
+        <file value="D:\\temp\\logfile.log" />
+        <staticLogFileName value="true" />
+        <rollingStyle value="size" />
+        <appendToFile value="true"/>
+        <datePattern value="yyyyMMdd-HHmm" />
+        <maximumFileSize value="1MB" />
+        <maxSizeRollBackups value="5" />        
+        <layout type="log4net.Layout.PatternLayout">
+          <conversionPattern value="%5level [%date] (%file:%line) %message%newline" />
+        </layout>
+      </appender>
+
+      <appender name="NetworkLogAppender" type="log4net.Appender.RollingFileAppender" >
+        <file value="D:\\temp\\networklogfile.log" />
+        <staticLogFileName value="true" />
+        <rollingStyle value="size" />
+        <appendToFile value="true"/>
+        <datePattern value="yyyyMMdd-HHmm" />
+        <maximumFileSize value="2MB" />
+        <maxSizeRollBackups value="5" />
+        <layout type="log4net.Layout.PatternLayout">
+          <conversionPattern value="%5level [%date] (%file:%line) %message%newline" />
+        </layout>
+      </appender>
+      
+      <root>
+        <level value="DEBUG" />
+        <!--
+        <appender-ref ref="ConsoleAppender" />
+        -->
+        <appender-ref ref="FileAppender" />
+      </root>
+      <logger additivity="false" name="NetworkLog">
+        <level value="ALL" />
+        <appender-ref ref="NetworkLogAppender" />
+      </logger>
+      
+    </log4net>
+
+  
+  
+</configuration>
